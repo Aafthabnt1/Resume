@@ -1,0 +1,788 @@
+Worked as full stack developer frontend-technology used was Angular and backend technology used was Spring Boot with JPA
+where I contributed in sprint-story analysis,design,proto-typing,development, unit testing and bugfixing.
+
+
+I was completing the assigned sprint stroy task with in the give time.
+I have also worked in developing Restful APIs,integrating with databases and implementing security measures also worked on connecting SOAP wsdl data to rest-end point by using jaxB Dependency.
+I have also worked in developing functional UI and integrating with backend ApI.
+Worked in downloading excel using jxls helper dependency.
+Worked on downloading pdf using PDF-Box  dependency.
+In the whole project 50% percent of testcases which contains different scenerios where covered by me which makes application robust. 
+At the end of sprint when the testing team where assigning defects some defects where assigned to me which were not worked by me in that case I was independently debugging the cause of the issue and used to fix the defect.
+
+
+
+*Notes:
+open close principle:
+(Closed for modification):
+Each new feature should not modify existing source code
+(Open for extension):
+A component should be extendable to make it behave in new ways.
+
+ex:      classB
+
+classA 
+
+         classC
+		 
+	class C,B both are highly depended on classA so making any modification or updating new feature in class A it might break the code in class B and C so to avoid
+	that use a new class D to implement the new feature that avoid the breakage.
+	
+	
+ex:
+			classB
+classA                classD
+            classC
+			
+	it can be done through interface
+	
+Liskov substitution principle:
+	this principle tells if the classes has no relationship hierarcy then seprate it out from hierarcy.
+	ex:Bird class has method fly
+	and ostrich extend this bird class then it unnecessary inherit the fly property which is not correct.
+	so to avoid that don't inherit the property of the bird.
+	
+Interface substitution principle:
+
+	This principle tells if there is a interface class and it contains many methods try to split it into appropriate interface so that extra method not get implemented once we try to implement the method
+	Identify the fatty or big interface 
+Dependency inversion principle:
+
+
+
+
+
+Design Patterns:
+
+
+we are going through structural pattern
+1)adapter pattern: it is like plug adopter like adaptor for c-type,adaptor to connect cable.
+example converting list to array using list.toArray() method. here toArray() method acts like adaptor.
+
+when we must use this:
+If the code has already written and its legacy code.
+
+
+2)Bridge pattern:
+adaptor and bridge pattern both are same 1 difference is bridge works with new code and adaptor works on legacy code.
+
+3)Composite pattern 
+it is a pattern which deals with tree structure pattern.
+
+
+
+
+
+
+TestCase with junit:
+Life cyle of @BeforeAll->@BeforeEach->@AfterEach->@AfterAll
+to disable the running of one testcase we can use @Disabled
+
+EasyMock:it is a frame work used to mock any 3rd connecting code ex db.
+if the mehtod is void how can we mock it 
+ex:servic.getSum();this is a void method
+in mockitio intead of using when directly assign it and call exceptLastCall().thenThrow(new RunTimeException);
+ex:servic.getSum();
+exceptLastCall().thenThrow(new RunTimeException);
+
+we can verify the method call order by EasyMock.createStrictControl()
+
+
+Collections:
+it has one property where we can not change the list i.e unmodifiableList(<listName>) 
+if we are using var l1= List.of(item1,item2); then we are adding l1.add(item3) it will not add because List.of() is implemented
+with unmodifiable method
+
+Collections with sets:
+set collection has Hashset and treeset 
+NavigableSet<> a=new HashSet<>();
+NavigableSet has different methods we can use 
+here comprable means we can sort it hased on any variable.
+
+
+
+streams api in java 8
+difference between stream api and collection api why streams api are not added inside the collection api?
+stream does not carry any data but in collections if use that map,filter,reduce it will allocate memory if there are 
+million of data then huge amount of memeory is needed due to this cpu utilization will also be more 
+so stream was introduced
+
+
+we cannot perform operation twice on same stream
+
+one of the important operator in the stream is flatMap operator.
+flatMap deals with onetoMany relationship b/t entities
+here flatMap takes a stream of object as input 
+ex: city class has cityName and list of person so to take all person name from all city we can use flatMap function
+
+Earlier we had created all streams using lists,sets of object but there are many different ways from which streams can be 
+created.
+1)from the lines of text file,
+2)from an array
+3)from the elements of the regular expression
+4)letter of the string of characters
+
+to close the streams we have dropWhile,takeWhile these only avoid nullpointer exceptions
+
+
+Collectors in streams:
+we have stream which connects collector apis it has various method where we can collect the processed data into
+list, sets and we can make our own customer objects to collect data 
+ex (collect(Collectors.toCollection(MYcollection::new)
+there is joing pattern also 
+
+collectors also has groupingBy() function
+ex:peoples.stream().filter(person -> person.getAge()>20).collect(Collectors.groupingBy(
+                age->age.getPerson(),Collectors.counting()
+        ));
+this groupingBy() function returns Map   
+groupingBy also supports downStreaming of characters i.e the result obtained by grouping by we can stream the data again 
+to compute the required result  
+
+
+
+
+
+Angular Component:
+To communicate between eachcomponent data we use 
+@input to take data from parent component and pass the data to children component
+@Output 
+
+To access the content of the component in other component class we use <ng-content>in html
+field Decorators:
+@input
+@output
+@HostBinding('class-Name') if i want to restrict the style class property based on flag then by using this decorator we
+can achieve it.
+ex:@HostBinding('class.red-text')
+   hasRedText=true;
+
+@HostListener('click',['$event'])
+if there is one mehtod in js file where we want to use the same method in other component js file then we use this decorator.
+
+@ViewChild(component name) 
+@ViewChildren()
+
+@ContentChild()
+@ContentChildren() used to query <ng-content>
+
+component lifeCycle:
+
+orders of lifecycle:
+
+constructor() first lifecycle;
+ngOnChanges() 2nd change;
+ngOnInit()
+ngDoCheck()
+ngAfterContentINit()
+ngAfterContentChecked()
+ngAfterViewInit()
+ngAfterViewChecked()
+ngOnDestroy()
+
+
+accessing services from other classs
+in constructor(private variableName:ServiceName) if variableName is showing any function name of serviceName then we must
+use @Injectable() on class 
+
+httpModule:it works with Observable where it gives subscribe and unsubscribe method
+here we need interface service 
+AsyncPipe(|):
+means | and property as name
+
+HTTP Actions:
+post,get,put,delete,patch,etc
+
+Http Headers and Options:
+
+Forms in angular:collecting info from users
+
+Templete Drive From
+
+how to set up forms module we need to import FormsModule.
+validations
+ngtouched=when wver the focus looses 
+ng-untouched
+ng-dirty
+if valid 
+ng-vaild,ng-invalid
+
+
+above these are all css style these all comes in ngModle
+
+if we don't want to use this if we want to as variable then remove ng
+
+Routers:
+this is a client side routing
+Router Configuration 
+
+childRoute
+RouteGuard:
+it used before routing function get activate this is used when 
+to check weather the user is authenticated or not before routing
+
+@NgModule()is the main module to imports all the libabry
+has decleration,imports,exports
+appModule is root module
+
+		sharedModule
+
+		Feature 1 Module
+		|	Feature 2 Module
+		|	|			
+			
+		AppModule -------> coreModule
+
+
+Microservice:
+
+it is way where overall serviceses are divided into seprate single serviceses.
+Each microservice must have its own database
+we should not update different db data in single transcation.
+
+Identifying bounoundaries for microservice:
+Microservice hosting options:
+*)Benefits of containers
+*)Source control and build
+
+Hosting Options:
+1)using virtual machine 
+2)using cloud as platform
+3)using containerizationw(most sutiable way to host the microservice)
+beacuse using this we can install all by running one docker compose command insted of installing single
+command.
+
+testing Microservice:
+Unit Test with high code coverage;
+2)service-level test test each microservice functionality indivisually.
+3)end to end level test i.e testing all microserviceses functionality together.(this test can be fragile )
+this test is tested in production environment.
+
+microservice template:
+This is used to demostrate the pattern that other microservice should follow.
+ex:logging,health check,configuration(i.e securing microserviceses),Authentication,build Script(ex containers)  
+
+advantages:
+By doing this it reduceses the time to create new microservice:
+Consistent tooling
+
+
+Communicating between microserviceses:
+questions:
+Should microserviceses call each other?
+Should client apps directly call microserviceses?
+Api gateways
+Types of communication:
+synchronous(rest template) and asynchronous(webclient template) communication
+messaging patterns
+resilient communications
+Service discovery
+
+
+
+calling microserviceses:
+
+Is it ok to call any microserviceses and frontend communicating directly to any backend microserviceses ?
+microservice do not worry about this but there is one disadvantages
+i.e tangled dependencies
+2)cascading failures
+3)poor performance
+
+approach 1                                 approach 2
+frontend				     frontend                                        
+   |						|
+   						|
+   |						
+api gateway				Backend for frontends(BFF)i.e for each frontend application create seprate api gateways  
+   |						|
+   |                                            |
+different                                   same as approach 1 
+microservicese
+   |
+   |
+messaging tools ex(rabbit mq)  	
+
+increased developer productivity
+
+
+Synchrous communication
+making a direct call to microservices and waiting for the results for respons to us
+i.e query related calls as this is synchronous communication the code must be very optimized 
+
+http communication is very oftenly used because 
+can perform many operation
+standard error codes 
+can send requests in JSON request or XML
+we can implement it based on restful resourceses.
+and also we can use headers to specify the content types.
+
+Asynchronous Communication:
+some time we want to do some operations through microservices but  no need to wait for the result
+i.e submitting the order i.e place an order--->payment---->order additional stock
+ once the person has submitted the order then all other processes can be done asyucronously without need of the person only we can send the order has been
+accepted message and the process will be done in backend. 
+
+in http we can achieve it 
+example once the order is accepted we can send 202 accepted status instead ok status and can send the id
+with the help of webhooks callbacks
+
+
+2)Via messaging tools:
+instead of communicating different microserviceses serviceses  directly 
+we can send it to message broker,it acts as intemediatory where then subscribe to the messages
+it has some advantages:
+if some microservice is unavaliable then other micrservice can subscribe the message by this way scaleablility can be achieved.
+
+message Types:
+1)Commands                     2)Events
+"Do this please"              "This happened"
+ex:sendEmail                   Subscribe to an event
+				ex:order placing
+
+Communication issues between microserviceses:
+we can not predict that all microservice are always running so 
+to handel this
+
+Implement retry for microserviceses i.e if communication fails between servicethen implement retry 
+with this based on the time interval it can send request again
+This dis-advantage is:
+If the serviceses is not at all up then there leads to whole microserviceses to be dowm
+
+so to eliminate this we can try 
+circuit Breaker approcah:
+
+client-------->[circuit-breaker]------->server
+
+if server is down then circuit breaker will be opened and the request will fail early
+client----->[circuit-breaker opens]---/---> server
+
+
+after some time it get closed and allows some request to server is it agian fail to respond  above steps will continue
+
+Caching is also good to improve the communication i.e if the service is down then 
+with the help of caching we can retrive cahed data i.e(redis)
+
+Service Discovery:
+here we use to register all the microservice 
+
+
+
+Securing Microservices:
+
+	1)Encryption-encrypting the data
+	2)Authentication-verifying who is the sender
+	3)Authorization-verifying wether he has required token i.e wether he can perform that actions or not
+	4)OAuth 2.0 and OpenId connect
+	5)Network Security
+		-Firewalls,IP whitelisting and virtual networks
+	6)Defense in depth:
+		- penetration testing,alerts,auditing
+
+
+Encrypting the data:
+while sending data to server(transit)
+	1)Use standard algoriths
+	2)for http we use Transport Layer Security(TLS)
+	3)SSL certificates this is issued by the comapny
+	4)and automatically renewing SSl certificates
+
+Encrypting the data at rest:
+	1)Disk encryption
+	2)Key management
+	3)Encrypt back up also
+
+Authentication:
+we need to know who is calling the service.
+HTTP Authorization Options:
+adding authorization in headers 
+ex:
+Authorization server(OAuth 2.0 and OpenIDConnect)
+		   sends(credentials) 1st
+client Application<----------------> Authorization Server
+ 	|	  recieve(access token) 2nd	
+	|(after 
+	| recieveing token in header)
+	|        3rd
+	|-----------------------> each microservice
+
+
+Authentication:who is calling?
+Authorization:what can they do?
+	ex:i can see my history,i can not see other history
+
+
+Authorization frame works:
+Based on roles we can descide the operations
+
+
+
+Securing Services with the networks approah:
+
+
+Defense in Depth:
+
+Adding more layer between client and server.
+i.e adding above measures 
+Authentication,Authorization,firewalls,etc.
+ 
+*)we should not rely on single defence layer.
+
+Additional Defensive Measure:
+penetration testing
+automated security testing--proves your apis reject unauthorized callers
+Attack detection:
+Auditing:adding crrt logs.
+
+
+*)Delivering the microserviceses or deploying the services:
+-Automation
+-Pipelines
+-Deployment environments
+Monitoring microservices
+-health checks
+-Aggregating logs
+
+
+Automated Deployment:
+we can achieve it by building pipeline release pipelines:
+Build--->unit test-->deploy microservice->service level test->deploy to QA->End to end tests->Release gate->Deploy to production
+
+Deployment Environments:
+Development    2)dev    3) QA      		4)production
+debug code     		End-to-end tests	pre-customer
+			Manual testing
+			pen testing
+			performance testing	
+
+
+Configuration files
+Artifact Registry:
+store build artifacts
+Deploy latest or previous version
+it can be achieved by Docker containers
+
+Upgrade Stratergies:
+
+1)Stop v1(version),start v2 in this stratergy there will be an downtime 
+2)Blue green swap
+    _
+ie |L|    will take care when v2 is deployed traffic is automatically swap to v2 version
+   |O| 
+   |A|		v1
+   |D|-------- 
+   |B|		v2	
+   |A|------
+   |l ancer|
+   ---------		
+
+this has minimal downtime approach.
+3)if there are multiple instanceses of same service then use auto upgrade approach
+
+
+
+
+
+DOCKER AND KUBERNETES:
+
+What is Containers?
+Applications is a business
+
+			putting one apps
+				|
+			container container  container
+				|
+			we install one os
+				|
+			physical server
+
+
+image(assume it as pre-packed) is nothing but container
+
+What is Docker?
+	
+Docker,Inc is a company which is start up for open source
+
+Docker Technology:
+making containers easy 
+
+Dockers have two edition:
+Community Edition(open source and we can contribute to it)
+
+take code-> build it into image->push to docker registory->build the image 
+
+
+For scaling up we use docker Swan and Kubernetes
+
+Kubernetes:
+	It is a open source developed by google.
+
+	Kubernetes:Scheduling,scaling,healing,updating....these take care of high level content
+
+	Docker:start,stop,delete.... containers this take care low level tasks
+
+	kubernetes manages all the containers based on the demand
+	
+	Does docker supports stateless and stateful service?
+	Stateless means once  the container is stopped all content are lost (ex:container with html,css,etc)
+	statefull " "    "     "    "       "	and agin its started it restores the data(ex:container with database)
+	docker supports both.
+
+what is Orchestration?
+	small serviceses combined together to work crrtly
+
+
+
+
+
+PGsql:
+
+standard practise is the
+default keyword like selct,from,etc all must be in uppercase and table name must be in lowerCase
+
+
+1)Like is same as = but i comes with 2 symbols %,_ 
+% means can have 0 or more characters
+_ only one character
+ex:Select * from city where cityname LIKE 'L%T' i.e city name should start from L and can have any character and should end with T
+ex:Select * from city where cityname LIKE 'L_T'	i.e city name should start from L and can have only 1 character and should end with T
+psotgres als allow to use regular expressions
+we can also use and | or 
+
+2)Between:matches specific boundary 
+where age>=30 AND age <= 40 instead of using relational operation we can use BETWEEN 30 and 40 
+
+3)IN:matches the value appering in list
+ex:instead of using 
+person where first_name='abc' or second_name='def' or third_name='ghi' instead we can use  where first_name IN("abc,def,ghi")
+
+OPErator Precedence:AND is evulated first then it looks OR operator to avoid this use parantesis()
+(),AND,OR,NOT
+
+Inner join and outer join and FULL Join
+INNER JOIN: joins two tables which has same foreign keys 
+if we write JOIN by default it take inner join
+
+Alias meaing giving own name to table with AS
+
+OUTER JOIN has two type LEFT JOIN and RIGHT JOIN
+LEFT OUTER JOIN:returns all record from left table and matching record from right table
+RIGHT OUTER JOIN:returns all record from right table and matching record from left table
+
+we can take example 
+customer and order table 
+if we want all customer data regardless of he has ordered an item or not then we can use OUTER left join
+if we want only the data of custmer who has ordered anything then we can use INNER join
+
+
+most used outer join is:
+left join
+
+
+
+FULL JOIN join both the table 
+
+ORDER BY used to sort the data by default it sorts ascending
+also ORDER BY has asc and dsc
+also we can use column number instead of using table name 
+
+assume ther are 2 column in a table AB   CD
+ex:select * from user ORDER BY  CD instead of using column name we can use number 1 ,2
+ 
+   select * from user ORDER BY  2 ASC
+
+
+
+sql give aggrates function
+SUM
+COUNT
+AVG
+MIN
+MAX
+
+
+Having clause is used with aggrator functions 
+ex:				Name    grade     age
+						2
+						3
+						4
+if we want aveage age whose >3
+then we use Having query
+
+select grade,AVG(age) as avg_age from person HAVING AVG(age)>3
+
+
+
+FUNCTIONS and OPERATORS:
+String operators and functions
+||(concatination) we can also use CONCAT key word
+ex:SELECT CONCAT(rejection_type,' ',rejection_reason) FROM "c3s-reporting"."Q_IPA_REJECTION_INFO";
+   SELECT rejection_type||' '||rejection_reason FROM "c3s-reporting"."Q_IPA_REJECTION_INFO";  
+
+char_length(string)
+SELECT CHAR_LENGTH(rejection_type) AS len FROM "c3s-reporting"."Q_IPA_REJECTION_INFO";
+LEFT(name of column,number)
+UPPER() used for converting all upper case
+REPLACE(column name,rename word,new word) 
+SELECT rejection_type,REPLACE(rejection_type,'D','6') AS len FROM "c3s-reporting"."Q_IPA_REJECTION_INFO";
+
+
+Date and Time Operators:
+
+
+operator    Example         		Result
++	    date'2001-09-28'+'7'	date'2001-10-05'
+-           time'5:00'-time'03:00'	time'02:00'
+*	    900* interval'1 second'	interval'00:15:00'
+/
+
+some functions we can directly use are
+CURRENT_DATE
+CURRENT_TIME
+NOW() current date and time together
+
+EXTRACT this keyword is used to extract the operation value 
+ex:after where we use this 
+where EXTRACT(perfom operation for date)>10
+WHERE EXTRACT(22-10-2021 - 23-11-2021)>10;
+
+! means factoral in 
+
+pg admin also has explicit and implicit conversion
+
+
+
+
+Transctions:
+
+transaction bundles multiple steps  into a single or if single step fails it will rollback the performed data.
+
+SYNTAX FOR TRANSCATION:
+BEGIN;
+	update sql statement
+SAVEPOINT first_save_point;
+	update error statenment
+ROLLBACK TO first_savepoint;
+	update correct_statenment
+COMMIT;
+ 
+
+update db
+
+
+
+8,7,6,5,4
+7,8,6,5,4
+
+
+
+
+
+
+Reactive Programming:
+
+Declerative code to build asyncronous processing pipelines
+
+
+
+
+
+Design Pattern:
+
+
+Factory Design pattern 
+this helps user to give the oject name which it wants to create if the object is present it will create and give the object or else it will throw null;
+Focus  on creating objects for interface rather than focusing on implementation
+Loose coupling more Robust code
+
+
+
+manufacturing processes
+1)processing operations:Shaping processes,particulate sequence,Defermation ,material removal
+2)property enhancing processes: 
+
+
+
+
+2)Assembly operations:Permanent joining
+
+topDown webserver
+contract
+
+redis intermedi
+
+Java 17 features:
+java syntax is similar to c
+Type System it will tell before running the code
+
+JVM:byte->machine code
+portibility:any platform(OS) we can run this
+it will take care of memory management garbage collector
+it will take car multi threaded code
+increase performance
+when web company grow up they turn into java shop
+
+Enterprise java
+
+java EE:Data persistance
+web applications
+security
+Messaging
+JSON/XML handeling
+
+java in Cloud:
+
+
+spring 2 to 3
+jakartha EE
+GravMM this optimize the starting runtime of application
+javax---->jarkatha
+in security: 
+
+instead of extending WebSecurityConfigureAdpator----|
+							use a @bean to configure security
+@GlobalMatchSecirity----->EnableMatchSecurity
+
+antMatchers---->RequstMatchers
+
+swagger2------>swagger 3 openapi
+
+
+
+
+
+ 
+
+
+ 
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
